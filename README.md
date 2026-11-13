@@ -2,7 +2,13 @@
 
 > High-performance AI resume builder that rewrites resumes against JDs, compiles Typst source to PDF via WASM in-browser, and runs deterministic ATS scoring.
 
-### 🛠️ Tech Stack & Topics
+### Tech Stack & Topics
+`resume-builder` | `typst` | `webassembly` | `ats-score` | `react` | `typescript` | `generative-ai`
+
+
+> High-performance AI resume builder that rewrites resumes against JDs, compiles Typst source to PDF via WASM in-browser, and runs deterministic ATS scoring.
+
+###  Tech Stack & Topics
 `resume-builder` `typst` `webassembly` `ats-score` `react` `typescript` `generative-ai`
 
 
@@ -47,22 +53,22 @@ Grayscale-first, high-contrast, minimalist SaaS aesthetic:
 ### 3. Core Pipeline (revised — see rationale below)
 
 ```
-User Input (JD) ─┐
-User Input (Resume) ─┼─▶ [1] Sanitize & Build Prompt ─▶ [2] LLM: Rewrite → Typst source
-Model Selection ─┘
+User Input (JD) 
+User Input (Resume)  [1] Sanitize & Build Prompt  [2] LLM: Rewrite → Typst source
+Model Selection 
 
-[2] output ─▶ [3] Compile Typst → PDF (client, WASM)
-                  │
-                  ▼ (only if compile succeeds)
+[2] output  [3] Compile Typst → PDF (client, WASM)
+                  
+                   (only if compile succeeds)
 [4] Deterministic ATS Scorer (keyword/skill overlap, no LLM) → base score + gaps
-                  │
-                  ▼
+                  
+                  
 [5] LLM: Qualitative Feedback (given JD, resume, base score, gaps) → structured suggestions
-                  │
-                  ▼
+                  
+                  
          score ≥ 85 OR iteration == 5?
-           │no                │yes
-           ▼                  ▼
+           no                yes
+                             
    feed suggestions      [6] Display final PDF + ATS Report
    back into [1],        + Code Perspective (editable Typst)
    loop (max 5x)
