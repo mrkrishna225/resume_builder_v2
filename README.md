@@ -1,4 +1,10 @@
-# Resume Architect
+# ResumeForge — AI ATS Resume Optimizer & Typst WASM Compiler
+
+> High-performance AI resume builder that rewrites resumes against JDs, compiles Typst source to PDF via WASM in-browser, and runs deterministic ATS scoring.
+
+### 🛠️ Tech Stack & Topics
+`resume-builder` `typst` `webassembly` `ats-score` `react` `typescript` `generative-ai`
+
 
 # ResumeForge — Lovable Rebuild Prompt (v2)
 
