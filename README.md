@@ -9,18 +9,34 @@ keyword matcher (not LLM-scored), and loops until it hits 85% or 5 iterations.
 1. You paste a JD and your current resume
 2. Server-side LLM rewrites the resume into Typst markup
 3. Client-side WASM compiler turns Typst into a live PDF preview
-4. Deterministic scorer checks keyword/skill overlap against the JD
+4. A deterministic scorer checks keyword/skill overlap against the JD
 5. If score < 85%, feedback goes back into the prompt and it tries again (max 5x)
-6. You get the final PDF + an editable Typst code view
+6. You get the final PDF + an editable code view (Monaco editor)
 
 ## Stack
 
-- React + Vite + TypeScript
-- Typst WASM compiler (`@myriaddreamin/typst.ts`)
-- Monaco Editor (lazy-loaded)
-- Supabase for persistence
-- Zod for validation on every boundary
-- Nitro server functions as LLM proxy (client never sees API keys)
+- **Frontend:** React + Vite + TypeScript, TanStack Router/Query
+- **Compiler:** `@myriaddreamin/typst.ts` — Typst compiled to WASM, runs client-side
+- **Editor:** Monaco Editor, lazy-loaded
+- **Backend:** Nitro server functions as an LLM proxy (client never touches API keys)
+- **DB:** Supabase (Postgres + Auth) for resume versions and history
+- **Validation:** Zod on every request/response boundary
+
+## Project structure
+
+```
+src/
+  components/
+    AtsReport.tsx        # ATS score breakdown display
+    CodePerspective.tsx  # Editable Typst source view
+    MonacoTypst.tsx      # Monaco editor configured for Typst
+    PdfPreview.tsx       # Live PDF rendering from WASM output
+    RunLog.tsx           # Iteration history log
+    ScoreBadge.tsx       # Visual score indicator
+  hooks/                 # Custom React hooks
+  routes/                # TanStack Router file-based routes
+  server.ts              # Nitro server entry
+```
 
 ## Run locally
 
